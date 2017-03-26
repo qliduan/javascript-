@@ -225,3 +225,5 @@ function heapSort(array) {
         len--;
         buildHeap(0);
     }
+    return array;
+}
