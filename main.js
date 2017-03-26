@@ -166,7 +166,7 @@ function mergeSort2(array) {
 
 
 /**
-    归并排序算法
+    选择排序算法
 */
 
 function selectSort(array) {
@@ -187,3 +187,41 @@ function selectSort(array) {
     }
     return array;
 }
+
+
+/**
+    堆排序算法
+*/
+
+function heapSort(array) {
+    var len = array.length;
+
+    function swap(i, j) {
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    function buildHeap(i) {
+        var left = 2 * i + 1;
+        var right = 2 * i + 2;
+        var last = i;
+        if (left < len && array[left] > array[last]) {
+            last = left;
+        }
+        if (right < len && array[right] > array[last]) {
+            last = right;
+        }
+        if (last != i) {
+            swap(last, i);
+            buildHeap(last);
+        }
+    }
+    for (var i = ((len / 2) >> 0); i >= 0; i--) {
+        buildHeap(i);
+    }
+    for (var j = len - 1; j >= 0; j--) {
+        swap(j, 0);
+        len--;
+        buildHeap(0);
+    }
