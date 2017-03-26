@@ -1,5 +1,6 @@
 # javascript排序算法
 
+## todo：用dom实现排序过程
 
 ## 冒泡排序
 ```javascript
