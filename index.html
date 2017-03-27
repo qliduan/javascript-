@@ -50,6 +50,7 @@
             <button class="btn" id="bubbleSort">冒泡排序</button>
             <button class="btn" id="quickSort">快速排序</button>
             <button class="btn" id="insertSort">插入排序</button>
+            <button class="btn" id="selectSort">选择排序</button>
         </div>
         <div id="container" style="margin-top:20px;">
         </div>
@@ -57,6 +58,7 @@
     <script type="text/javascript" src="src/bubleSort.js"></script>
     <script type="text/javascript" src="src/quickSort.js"></script>
     <script type="text/javascript" src="src/insertSort.js"></script>
+    <script type="text/javascript" src="src/selectSort.js"></script>
     <script type="text/javascript">
     var container = document.querySelector('#container');
 
@@ -86,6 +88,8 @@
                     drawQuickSort(container, info)
                 } else if (this.type == 'insertSort') {
                     drawInsertSort(container, info)
+                } else if (this.type == 'selectSort') {
+                    drawSelectSort(container, info)
                 }
 
                 var _this = this;
@@ -130,6 +134,8 @@
             quickSort(tastArray.slice(0), stack);
         } else if (id == 'insertSort') {
             insertSort(tastArray.slice(0), stack);
+        } else if (id == 'selectSort') {
+            selectSort(tastArray.slice(0), stack);
         }
         stack.type = id;
         stack.start();
