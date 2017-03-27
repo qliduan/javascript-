@@ -3,8 +3,11 @@
 ## todo：用dom实现排序过程
 
 ## 冒泡排序
+
 ### 排序过程图
-![运行效果图](https://github.com/qliduan/javascript-sort/tree/master/img/bubleSort.gif)
+
+![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/bubleSort.gif)
+
 ```javascript
 
 function bubbleSort(array) {
