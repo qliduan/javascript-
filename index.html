@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="cleartype" content="on">
+    <style>
+    .row {
+        display: -webkit-flex;
+        display: flex;
+    }
+    
+    .row-bottom {
+        -webkit-box-align: end;
+        -ms-flex-align: end;
+        -webkit-align-items: flex-end;
+        -moz-align-items: flex-end;
+        align-items: flex-end;
+    }
+    
+    .col {
+        -webkit-flex: 1;
+        flex: 1;
+        margin: 0 .5px;
+    }
+    
+    html {
+        max-width: 640px;
+        margin: 0 auto;
+    }
+    .btn {
+        padding: 5px 8px;
+        border-radius:4px;
+        border:none;
+        color:#333;
+        margin:2px 4px;
+    }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div id="proxy">
+            <button class="btn" id="bubbleSort">冒泡</button>
+            <button class="btn" id="quickSort">快速</button>
+        </div>
+        <div id="container" style="margin-top:20px;">
+        </div>
+    </div>
+    <script type="text/javascript" src="src/bubleSort.js"></script>
+    <script type="text/javascript" src="src/quickSort.js"></script>
+    <script type="text/javascript">
+        var container = document.querySelector('#container');
+        function Stack() {
+            this.task = [];
+        }
+        Stack.prototype = {
+            constructor: Stack,
+            clear: function() {
+                if (this.timeoutId) clearTimeout(this.timeoutId);
+                this.task = [];
+            },
+            add: function(item) {
+                this.task.push(item);
+            },
+            start: function() {
+                this.next();
+            },
+            timeoutId: null,
+            type:null,
+            next: function() {
+                var info = this.task.shift();
+                if (info) {
+                    if(this.type == 'bubbleSort') {
+                        drawBubbleSort(container, info);
+                    } else if(this.type == 'quickSort') {
+                        drawQuickSort(container, info)
+                    }
+                    
+                    var _this = this;
+                    this.timeoutId = setTimeout(function() {
+                        _this.timeoutId = null;
+                        _this.next()
+                    }, 100)
+
+                }
+            }
+        }
+
+        var getSingleStack = function(fn) {
+            var instance = null;
+            return function() {
+                return instance || (instance = new fn());
+            }
+        }
+        var singleStack = getSingleStack(Stack);
+
+        var tastArray = [];
+        for (var i = 0; i < 50; i++) {
+            tastArray.push(((Math.random() * 300) >> 0) + 10)
+        }
+        
+        
+        var proxy = document.querySelector('#proxy');
+        drawBubbleSort(container, {
+            array: tastArray.slice(0),
+            index: -1,
+            compareIndex: -1
+        })
+        proxy.onclick = function(e) {
+            var stack = new singleStack();
+            stack.clear();
+            var target = e.target;
+            if(target.id && target.id == 'bubbleSort') {
+                stack.type = 'bubbleSort';
+                bubbleSort(tastArray.slice(0), stack);
+            } else if(target.id && target.id == 'quickSort') {
+                stack.type = 'quickSort';
+                quickSort(tastArray.slice(0), stack);
+            }
+            stack.start();
+        }
+    </script>
+</body>
+
+</html>
