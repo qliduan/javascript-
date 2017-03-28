@@ -1,10 +1,7 @@
-# javascript排序算法
-
-## todo：用dom实现排序过程
+# javascript排序算法，
 
 ## 冒泡排序
 
-### 排序过程图
 
 ![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/bubleSort.gif)
 
@@ -32,6 +29,7 @@ function bubbleSort(array) {
 ```
 
 ## 快速排序
+![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/quickSort.gif)
 ```javascript
 
     function quickSort(array) {
@@ -67,6 +65,80 @@ function bubbleSort(array) {
             sortFn(++end, oEnd);
         }
         sortFn(0, array.length - 1);
+        return array;
+    }
+
+```
+## 插入排序
+![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/insertSort.gif)
+```javascript
+
+    function insertSort(array) {
+        var len = array.length,
+            j, key;
+        for (var i = 1; i < len; i++) {
+            key = array[i];
+            j = i;
+            while (--j > -1) {
+                if (array[j] > key) {
+                    array[j + 1] = array[j];
+                } else {
+                    break;
+                }
+            }
+            array[j + 1] = key;
+        }
+        return array;
+    }
+
+```
+## 希尔排序
+![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/shellSort.gif)
+```javascript
+
+    function shellSort(array) {
+        var len = array.length;
+        var gap = 1;
+        while (gap < len / 3) {
+            gap = gap * 3 + 1;
+        }
+        var i, j, temp;
+        while (gap > 0) {
+            for (i = gap; i < len; i++) {
+                for (j = i; j >= gap; j -= gap) {
+                    if (array[j - gap] > array[j]) {
+                        temp = array[j];
+                        array[j] = array[j - gap];
+                        array[j - gap] = temp;
+                    }
+                }
+            }
+            gap = (gap - 1) / 3;
+        }
+        return array;
+    }
+
+```
+## 选择排序
+![运行效果图](https://github.com/qliduan/javascript-sort/blob/master/img/selectSort.gif)
+```javascript
+
+    function selectSort(array) {
+        var len = array.length;
+        var temp, index, i, j;
+        for (i = 0; i < len - 1; i++) {
+            index = i;
+            for (j = i + 1; j < len; j++) {
+                if (array[j] < array[index]) {
+                    index = j;
+                }
+            }
+            if (index != i) {
+                temp = array[index];
+                array[index] = array[i];
+                array[i] = temp;
+            }
+        }
         return array;
     }
 
