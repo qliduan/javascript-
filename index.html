@@ -35,7 +35,7 @@
     }
     
     .btn {
-        padding: 5px 8px;
+        padding: 5px 2px;
         border-radius: 4px;
         border: none;
         color: #333;
@@ -51,6 +51,7 @@
             <button class="btn" id="quickSort">快速排序</button>
             <button class="btn" id="insertSort">插入排序</button>
             <button class="btn" id="selectSort">选择排序</button>
+            <button class="btn" id="shellSort">希尔排序</button>
         </div>
         <div id="container" style="margin-top:20px;">
         </div>
@@ -59,6 +60,7 @@
     <script type="text/javascript" src="src/quickSort.js"></script>
     <script type="text/javascript" src="src/insertSort.js"></script>
     <script type="text/javascript" src="src/selectSort.js"></script>
+    <script type="text/javascript" src="src/shellSort.js"></script>
     <script type="text/javascript">
     var container = document.querySelector('#container');
 
@@ -90,6 +92,8 @@
                     drawInsertSort(container, info)
                 } else if (this.type == 'selectSort') {
                     drawSelectSort(container, info)
+                } else if (this.type == 'shellSort') {
+                    drawShellSort(container, info)
                 }
 
                 var _this = this;
@@ -111,7 +115,7 @@
     var singleStack = getSingleStack(Stack);
 
     var tastArray = [];
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 30; i++) {
         tastArray.push(((Math.random() * 300) >> 0) + 10)
     }
 
@@ -136,10 +140,14 @@
             insertSort(tastArray.slice(0), stack);
         } else if (id == 'selectSort') {
             selectSort(tastArray.slice(0), stack);
+        } else if (id == 'shellSort') {
+            shellSort(tastArray.slice(0), stack);
         }
         stack.type = id;
         stack.start();
     }
+
+
     </script>
 </body>
 
